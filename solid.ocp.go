@@ -21,17 +21,15 @@ const (
 )
 
 type Product struct {
-	name string
+	name  string
 	color Color
-	size Size
+	size  Size
 }
 
 type Filter struct {
-
 }
 
-func (f *Filter) filterByColor(
-	products []Product, color Color)[]*Product {
+func (f *Filter) filterByColor(products []Product, color Color) []*Product {
 	result := make([]*Product, 0)
 
 	for i, v := range products {
@@ -43,8 +41,7 @@ func (f *Filter) filterByColor(
 	return result
 }
 
-func (f *Filter) filterBySize(
-	products []Product, size Size) []*Product {
+func (f *Filter) filterBySize(products []Product, size Size) []*Product {
 	result := make([]*Product, 0)
 
 	for i, v := range products {
@@ -56,9 +53,7 @@ func (f *Filter) filterBySize(
 	return result
 }
 
-func (f *Filter) filterBySizeAndColor(
-	products []Product, size Size,
-	color Color)[]*Product {
+func (f *Filter) filterBySizeAndColor(products []Product, size Size, color Color) []*Product {
 	result := make([]*Product, 0)
 
 	for i, v := range products {
@@ -97,27 +92,27 @@ type AndSpecification struct {
 }
 
 func (spec AndSpecification) IsSatisfied(p *Product) bool {
-	return spec.first.IsSatisfied(p) &&
-		spec.second.IsSatisfied(p)
+	return spec.first.IsSatisfied(p) && spec.second.IsSatisfied(p)
 }
 
-type BetterFilter struct {}
+type BetterFilter struct{}
 
-func (f *BetterFilter) Filter(
-	products []Product, spec Specification) []*Product {
+func (f *BetterFilter) Filter(products []Product, spec Specification) []*Product {
 	result := make([]*Product, 0)
+
 	for i, v := range products {
 		if spec.IsSatisfied(&v) {
 			result = append(result, &products[i])
 		}
 	}
+
 	return result
 }
 
 func main_() {
 	apple := Product{"Apple", green, small}
 	tree := Product{"Tree", green, large}
-	house := Product{ "House", blue, large}
+	house := Product{"House", blue, large}
 
 	products := []Product{apple, tree, house}
 
@@ -144,9 +139,3 @@ func main_() {
 		fmt.Printf(" - %s is large and green\n", v.name)
 	}
 }
-
-
-
-
-
-

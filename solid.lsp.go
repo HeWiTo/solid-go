@@ -69,8 +69,7 @@ func UseIt(sized Sized) {
 	sized.SetHeight(10)
 	expectedArea := 10 * width
 	actualArea := sized.GetWidth() * sized.GetHeight()
-	fmt.Print("Expected an area of ", expectedArea,
-		", but got ", actualArea, "\n")
+	fmt.Print("Expected an area of ", expectedArea, ", but got ", actualArea, "\n")
 }
 
 func main() {

@@ -20,9 +20,9 @@ type Person struct {
 }
 
 type Info struct {
-	from *Person
+	from         *Person
 	relationship Relationship
-	to *Person
+	to           *Person
 }
 
 type RelationshipBrowser interface {
@@ -37,8 +37,7 @@ func (rs *Relationships) FindAllChildrenOf(name string) []*Person {
 	result := make([]*Person, 0)
 
 	for i, v := range rs.relations {
-		if v.relationship == Parent &&
-			v.from.name == name {
+		if v.relationship == Parent && v.from.name == name {
 			result = append(result, rs.relations[i].to)
 		}
 	}
@@ -47,17 +46,14 @@ func (rs *Relationships) FindAllChildrenOf(name string) []*Person {
 }
 
 func (rs *Relationships) AddParentAndChild(parent, child *Person) {
-	rs.relations = append(rs.relations,
-		Info{parent, Parent, child})
-	rs.relations = append(rs.relations,
-		Info{child, Child, parent})
+	rs.relations = append(rs.relations, Info{parent, Parent, child})
+	rs.relations = append(rs.relations, Info{child, Child, parent})
 }
 
 type Research struct {
 	// relationships Relationships
 	browser RelationshipBrowser // low-level
 }
-
 
 func (r *Research) Investigate() {
 	//relations := r.relationships.relations
@@ -74,9 +70,9 @@ func (r *Research) Investigate() {
 }
 
 func main() {
-	parent := Person{"John" }
-	child1 := Person{ "Chris" }
-	child2 := Person{ "Matt" }
+	parent := Person{"John"}
+	child1 := Person{"Chris"}
+	child2 := Person{"Matt"}
 
 	// low-level module
 	relationships := Relationships{}
